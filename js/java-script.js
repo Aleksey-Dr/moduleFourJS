@@ -423,3 +423,191 @@ const total = [2, 7, 3, 14, 6].reduce((previousValue, number) => {
 }, 0);
 
 console.log(total); // 32
+
+// Video. Module four. Lesson 7. Callback-function and closures
+// Function - it is value!
+// Exemple 1
+const fnA = function (message, callback) {
+    console.log(message, callback());
+    
+}
+
+// fnA('Hello!');
+
+const fnB = function () {
+    console.log('World!!!');
+}
+
+fnA('Hello!', fnB);
+
+// Exemple 2
+// Reusable-code
+console.log('Exemple 2')
+console.log('Reusable code')
+const doMath = function (a, b, callback) {
+    const result = callback(a, b);
+
+    console.log('Result:', result);
+}
+
+const addXY = function (x, y) {
+    return x + y;
+}
+
+const subXY = function (x, y) {
+    return x - y;
+}
+
+doMath(2, 3, addXY);
+doMath(10, 2, subXY);
+
+// Exemple 3
+console.log('Exemple 3');
+
+const buttonRef = document.querySelector('.js-button');
+
+const handleButtonClick = function () {
+    console.log('Click to button');
+};
+
+buttonRef.addEventListener('click', handleButtonClick);
+
+// filter (not filter())
+console.log('filter (not filter())');
+
+const filter = function (value, array) {
+    const filteredArray = [];
+
+    for (const element of array) {
+        if (value < element) {
+            filteredArray.push(element);
+        }
+    }
+
+    return filteredArray;
+}
+
+console.log(filter(4, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+
+const filterOne = function (array, callback) {
+    const filteredArray = [];
+    for (const element of array) {
+        if (callback(element) === true) {
+            filteredArray.push(element);
+        }
+    }
+    return filteredArray;
+};
+
+console.log(filterOne([10, 20, 30, 40, 50, 60, 70, 80, 90],
+    value => value > 30));
+
+console.log(filterOne(
+    ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn'],
+    value => value === 'Earth' || value === 'Mars' || value === 'Jupiter',
+));
+
+let a = 1;
+console.log(a === 1 || a === 2);
+
+// closures
+console.log('Closures. Exemple 1');
+
+const fnC = function (parameter) {
+    const innerVariable = 'value';
+
+    const innerFunction = function () {
+        console.log(parameter);
+        console.log(innerVariable);
+    }
+
+    return innerFunction;
+};
+
+console.log(fnC(100));
+
+const fnD = fnC(100);
+fnD();
+console.log(fnD());
+
+console.log('Closures. Exemole 2. Rouder');
+
+const rounder = function (number, places) {
+    return Number(number.toFixed(places));
+}
+
+console.log(rounder(3.2658, 2));
+
+const rounderA = function (number) {
+    const innerFunction = function (places) {
+        console.log(Number(number.toFixed(places)));
+    };
+
+    return innerFunction;
+}
+
+const number1 = rounderA(3.2658);
+number1(3);
+
+// Exemple. Salary
+console.log('Exemple. Salary');
+
+const salaryManagerFactory = function (employeeName, baseSalary) {
+    let salary = baseSalary;
+
+    return {
+        raise(amount) {
+            salary += amount;
+        },
+        lower(amount) {
+            salary -= amount;
+        },
+        current() {
+            return `Currently salary ${employeeName} - ${salary}`;
+        },
+    };
+};
+
+const salaryManager = salaryManagerFactory('Aleksey', 2500);
+
+console.log(salaryManager.current());
+console.dir(salaryManager);
+
+console.log(salaryManager.raise(1300));
+console.log(salaryManager.current());
+
+// Arrow functions
+console.log('Arrow functions');
+
+const addA = function (a, b, c) {
+    console.log(arguments);
+    return a + b + c;
+};
+
+addA(1, 2, 3);
+
+const addB = (a, b, c) => {
+    console.log(a, b, c);
+    return a + b + c;
+};
+
+addB(10, 20, 30);
+console.log(addB(10, 20, 30));
+
+const addC = (a, b, c) => a + b + c;
+
+console.log(addC(100, 200, 300));
+
+const addNumber = value => value += 5;
+console.log(addNumber(5));
+
+const massage = () => 'Hello!';
+console.log(massage());
+
+const fnObj = () => (
+    {
+        a: 1,
+        b: 2,
+    }
+);
+console.log(fnObj());
