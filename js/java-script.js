@@ -611,3 +611,72 @@ const fnObj = () => (
     }
 );
 console.log(fnObj());
+
+// Video. Arrow functions
+// Implicit
+const massageA = () => console.log('Hello!!!');
+massageA();
+
+// args
+const numbersA = (...args) => {
+    console.log(args);
+};
+
+numbersA(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+// Video. Module 4. Lasson 8 part 1
+// forEach() vs map()
+
+const numbersB = [50, 60, 70, 80, 90];
+
+console.log(numbersB.forEach(function (number) {
+    return number * 2;
+}));
+
+console.log(numbersB.map(function (number) {
+    return number * 2;
+}));
+
+// reduce()
+console.log('reduce()');
+
+const numbersC = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+
+console.log(numbersC);
+
+const totalC = numbersC.reduce((acc, number) => {
+    console.log('number:', number);
+    console.log('acc:', acc);
+
+    return acc + number;
+}, 0);
+
+console.log(totalC);
+
+const totalCC = numbersC.reduce((acc, number) => acc + number + 1, 0);
+
+console.log(totalCC);
+
+// Exemple. reduce()
+console.log('Exemple. reduce()');
+
+const cart = [
+    {label: '🍎', price: 20, quantity: 2,},
+    {label: '🍋', price: 50, quantity: 3,},
+    {label: '🍑', price: 60, quantity: 4,},
+]
+
+const totalAmount = cart.reduce((total, item) =>
+    total + item.price * item.quantity, 0);
+
+console.log(totalAmount);
+
+const totalFruits = cart.reduce((total, item) =>
+    total + item.quantity, 0);
+
+console.log(totalFruits);
+
+const totalPrice = cart.reduce((total, { price, quantity }) =>
+    total + price * quantity, 0);
+
+console.log(totalPrice);
